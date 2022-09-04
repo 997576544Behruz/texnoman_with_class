@@ -1,0 +1,36 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<table class="table container">
+    <thead>
+      <tr class="table-primary text-center">
+        <th scope="col">#</th>
+        <th scope="col">Image</th>
+        <th scope="col">Foydalanuvchilar</th>
+        <th scope="col">Region</th>
+        <th scope="col">So'ngi tashrif</th>
+        <th scope="col">A'zo bo'lgan</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+      <tr class="text-center">
+        <td width="10%"  scope="row">{{forloop.counter }}</td>
+        <td>
+        {% if user.image %}
+            <img style="width:50px; border-radius:40%" src="{{user.image.url}}" alt="">
+        {% else %}
+            <img style="width:50px; border-radius:40%" src="{% static  'img/person.jpg'  %}" alt="">
+        {% endif %}
+      </td>
+        <td style="word-wrap: break-word;" width="20%">{{user.username}}</td>
+        <td width="20%" style="word-wrap: break-word;">{{user.address}}</td>
+        <td width="20%" style="word-wrap: break-word;">{{user.last_login}}</td>
+        <td width="20%" style="word-wrap: break-word;">{{user.date_joined}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% endblock %}

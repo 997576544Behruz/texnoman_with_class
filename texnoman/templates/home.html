@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %} 
+<div class="row">
+{% for blog in blogs %}
+    <div class="col-lg-12 responsive-column-half">
+        <div class="card card-item hover-y">
+            <a href="{% url 'detail' blog.slug %}" class="card-img">
+                <img class="lazy" style="height: 250px;" src="{{blog.image.url}}" data-src="images/img6.jpg" alt="Card image">
+            </a>
+            <div class="card-body pt-0">
+                <a href="{% url 'category' blog.category.slug %}" class="card-link">{{blog.category}}</a>
+                <h5 class="card-title fw-medium"><a href="{% url 'detail' blog.slug %}">{{blog.content|truncatechars:"150"}}</a></h5>
+                <div class="media media-card align-items-center shadow-none p-0 mb-0 rounded-0 mt-4 bg-transparent">
+                    <a href="#" class="media-img media-img--sm d-block mr-2 rounded-full">
+                        {% if blog.user.image %}    
+                            <img src="{{blog.user.image.url}}" alt="avatar" class="rounded-full">
+                        {% else %}
+                            <img src="{% static 'img/person.jpg' %}" alt="avatar" class="rounded-full">
+                        {% endif %}
+                    </a>
+                    <div class="media-body">
+                        <h5 class="fs-14 fw-medium">By <a href="#">{{blog.user}}</a></h5>
+                        <small class="meta d-block lh-20">
+                            <span>{{blog.created_at|date:"d.m.Y // H:i:s"}}</span>
+                        </small>
+                    </div>
+                </div>
+            </div><!-- end card-body -->
+        </div><!-- end card -->
+    </div><!-- end col-lg-6 -->
+{% endfor %}
+</div><!-- end row -->
+<div class="pager text-center pt-30px">
+<nav aria-label="Page navigation example">
+    <ul class="pagination generic-pagination justify-content-center">
+        {% if blogs.has_previous %}
+        <li class="page-item">
+            <a href="?page={{ blogs.previous_page_number }}"> < </a>
+        </li>
+        {% endif %}
+        {% for i in blogs.paginator.page_range %}
+        <li class="page-item {% if i == blogs.number %} active {% endif %}" ><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+        {% endfor %}
+        {% if blogs.has_next %}
+
+        <li class="page-item">
+            <a href="?page={{ blogs.next_page_number }}"> > </a>
+        </li>
+        {% endif %}
+
+    </ul>
+</nav>
+<p class="fs-13 pt-3">Showing {{blogs.number}}-{{blogs.paginator.num_pages}} results of {{blogs.paginator.num_pages}} articles</p>
+</div>
+{% endblock %}

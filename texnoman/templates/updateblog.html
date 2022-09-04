@@ -1,0 +1,54 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<!-- ================================
+         START QUESTION AREA
+================================= -->
+<section class="question-area pt-40px pb-40px">
+    <div class="container">
+        <div class="filters pb-40px d-flex flex-wrap align-items-center justify-content-between">
+            <h3 class="fs-22 fw-medium mr-0">Add new post</h3>
+            <ul class="breadcrumb-list">
+                <li><a href="#">Home</a><span><svg xmlns="http://www.w3.org/2000/svg" height="19px" viewBox="0 0 24 24" width="19px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"></path></svg></span></li>
+                <li>Add new post</li>
+            </ul>
+        </div><!-- end filters -->
+        <form   method="post" class="row" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-lg-8">
+                <div class="card card-item">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="fs-14 text-black fw-medium lh-20">Title</label>
+                            {% render_field form.title type="text" class="form-control form--control fs-14" placeholder="Title" %}
+                        </div><!-- end form-group -->
+                        <div class="form-group">
+                            <label class="fs-14 text-black fw-medium lh-20">Content</label>
+                            {% render_field form.content type="text" class="form-control form--control user-text-editor" placeholder="Enter Text" %}
+                        </div><!-- end form-group -->
+                        <div class="form-group">
+                            {% render_field form.image class="form-control form--control fs-14"  %}
+                        </div><!-- end form-group -->
+                        <div class="form-group">
+                            <label class="fs-14 text-black fw-medium lh-20">Category</label>
+                            {% render_field form.category type='text' class="form-control form--control fs-14"  %}
+                        </div><!-- end form-group -->
+                        <div class="form-group">
+                            <label class="fs-14 text-black fw-medium lh-20">Tags</label> <br>
+                            <input type="text" name="tags" required value="{{satr|title}}">
+                        </div><!-- end form-group -->
+                        <div class="form-group mb-0">
+                            <button class="btn theme-btn" type="submit">Add Blog</button>
+                        </div><!-- end form-group -->
+                    </div><!-- end card-body -->
+                </div>
+            </div><!-- end col-lg-8 -->
+        </form>
+    </div><!-- end container -->
+</section><!-- end question-area -->
+<!-- ================================
+         END QUESTION AREA
+================================= -->
+
+{% endblock %}

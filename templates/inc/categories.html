@@ -1,0 +1,14 @@
+<div class="card card-item">
+    <div class="card-body">
+        <h3 class="fs-17 pb-3">Categories</h3>
+        <div class="divider"><span></span></div>
+        <div class="category-list pt-4">
+            {% for category in categories %}
+            <a href="{% url 'category' category.slug %}" class="cat-item d-flex align-items-center justify-content-between mb-3 hover-y">
+                <span class="cat-title">{{category.name}}</span>
+                <span class="cat-number">{{category.blog_set.count}}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div><!-- end card -->

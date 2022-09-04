@@ -1,0 +1,21 @@
+<div class="card card-item">
+    <div class="card-body">
+        <h3 class="fs-17 pb-3">Trending Posts</h3>
+        <div class="divider"><span></span></div>
+        <div class="sidebar-questions pt-3">
+            {% for blog in trending_posts %}
+                <div class="media media-card media--card media--card-2">
+                    <div class="media-body">
+                        <h5><a href="{% url 'detail' blog.slug %} ">{{blog.title}}</a></h5>
+                        <div class="d-flex">
+                            <small class="meta w-100 mt-2" >
+                                <span class="pr-1">{{blog.created_at|date:"Y-m-d | H:i"}}</span>
+                                <span style="float: right;">views: {{blog.views}}</span>
+                            </small>
+                        </div>
+                    </div>
+                </div><!-- end media -->
+            {% endfor %}
+        </div><!-- end sidebar-questions -->
+    </div>
+</div><!-- end card -->

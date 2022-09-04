@@ -1,0 +1,11 @@
+<div class="card card-item">
+    <div class="card-body">
+        <h3 class="fs-17 pb-3">Trending Tags</h3>
+        <div class="divider"><span></span></div>
+        <div class="tags pt-4">
+            {% for tag in tags %}
+                <a href="{% url 'tag' tag.slug %}" class="tag-link tag-link-md">{{tag.name}}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div><!-- end card -->
